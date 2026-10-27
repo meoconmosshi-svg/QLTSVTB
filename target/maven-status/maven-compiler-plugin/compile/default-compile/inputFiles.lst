@@ -4,6 +4,7 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\CapPhatBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\CauHinhBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\DanhMucBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\DieuChuyenBUS.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\KhauHaoBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\KiemKeBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\NguoiDungBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\NhanVienBUS.java
@@ -31,6 +32,7 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\CapPhatDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\CauHinhDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\DanhMucDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\DieuChuyenDAO.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\KhauHaoDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\KiemKeDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\NguoiDungDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\NhanVienDAO.java
@@ -48,6 +50,8 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\CapPhat.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\CauHinh.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\ChiTietPhieuNhap.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\DieuChuyen.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\KhauHao.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\KhauHaoInfo.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\KiemKe.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\LoaiTaiSan.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\NhaCungCap.java
@@ -75,6 +79,8 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\CapPhatPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\DieuChuyenDialog.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\DieuChuyenPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\ForgotPasswordDialog.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\KhauHaoDialog.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\KhauHaoPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\KiemKeDialog.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\KiemKePanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\LoginFrame.java

@@ -94,6 +94,7 @@ public class MainFrame extends JFrame {
             addMenu(sidebar, "Điều chuyển",  new DieuChuyenPanel());
             addMenu(sidebar, "Yêu cầu",      new YeuCauPanel());
             addMenu(sidebar, "Nhập kho",     new NhapKhoPanel());
+            addMenu(sidebar, "📉 Khấu hao",     new KhauHaoPanel());
             addMenu(sidebar, "Bảo trì",      new BaoTriPanel());
             addMenu(sidebar, "Kiểm kê",      new KiemKePanel());
             addMenu(sidebar, "Thanh lý",     new ThanhLyPanel());

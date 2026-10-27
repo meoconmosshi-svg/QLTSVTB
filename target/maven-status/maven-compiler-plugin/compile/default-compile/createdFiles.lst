@@ -3,6 +3,7 @@ com\qlts\util\Parse.class
 com\qlts\view\PhongBanPanel.class
 com\qlts\dao\NhatKyDAO.class
 com\qlts\entity\CauHinh.class
+com\qlts\view\KhauHaoPanel$2.class
 com\qlts\component\Dialogs.class
 com\qlts\view\NhapKhoDialog$ChiTietTableModel.class
 com\qlts\Main.class
@@ -47,6 +48,7 @@ com\qlts\common\Constants.class
 com\qlts\dao\CauHinhDAO.class
 com\qlts\view\YeuCauPanel$2.class
 com\qlts\view\DieuChuyenDialog.class
+com\qlts\view\KhauHaoPanel$1.class
 com\qlts\bus\ThanhLyBUS.class
 com\qlts\dao\BaoTriDAO.class
 com\qlts\dao\DieuChuyenDAO.class
@@ -61,6 +63,7 @@ com\qlts\bus\NguoiDungBUS.class
 com\qlts\entity\ThietBi.class
 com\qlts\util\ImageUtil.class
 com\qlts\view\ThanhLyPanel.class
+com\qlts\entity\KhauHaoInfo.class
 com\qlts\bus\ThongKeBUS.class
 com\qlts\dao\CapPhatDAO.class
 com\qlts\view\NhapKhoPanel$3.class
@@ -92,6 +95,7 @@ com\qlts\bus\CapPhatBUS.class
 com\qlts\component\CrudPanel.class
 com\qlts\view\YeuCauDialog.class
 com\qlts\component\FormDialog.class
+com\qlts\view\KhauHaoPanel$3.class
 com\qlts\view\NhanVienPanel.class
 com\qlts\view\NhapKhoPanel.class
 com\qlts\view\BaoCaoThongKePanel.class
@@ -100,10 +104,13 @@ com\qlts\bus\BaoTriBUS.class
 com\qlts\view\DieuChuyenDialog$1.class
 com\qlts\view\BaoTriDialog.class
 com\qlts\util\PasswordUtil.class
+com\qlts\view\KhauHaoPanel.class
 com\qlts\view\ThanhLyDialog$Item.class
 com\qlts\bus\DanhMucBUS.class
 com\qlts\view\PhongBanDialog$1.class
 com\qlts\dao\YeuCauCapPhatDAO.class
+com\qlts\entity\KhauHao.class
+com\qlts\bus\KhauHaoBUS.class
 com\qlts\bus\NhanVienBUS.class
 com\qlts\common\DataAccessException.class
 com\qlts\component\CrudPanel$1.class
@@ -113,9 +120,11 @@ com\qlts\util\JdbcUtil.class
 com\qlts\view\NguoiDungDialog.class
 com\qlts\bus\DieuChuyenBUS.class
 com\qlts\dao\ThietBiDAO.class
+com\qlts\view\KhauHaoDialog.class
 com\qlts\entity\ChiTietPhieuNhap.class
 com\qlts\view\KiemKeDialog$Item.class
 com\qlts\view\ThanhLyDialog.class
+com\qlts\dao\KhauHaoDAO.class
 com\qlts\view\TaiSanPanel.class
 com\qlts\view\CapPhatDialog.class
 com\qlts\view\TraDialog.class
