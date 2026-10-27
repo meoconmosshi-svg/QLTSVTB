@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ public class CapPhatDAO {
     }
 
     /** Cấp phát: đánh dấu tài sản/thiết bị "Đang sử dụng" và tạo phiếu - trong cùng một transaction. */
-    public void capPhat(CapPhat cp, Integer nguoiCapPhat) {
+    public int capPhat(CapPhat cp, Integer nguoiCapPhat) {
+        int newId = -1;
         try (Connection c = DBConnection.getConnection()) {
             c.setAutoCommit(false);
             try {
@@ -59,7 +61,8 @@ public class CapPhatDAO {
                         + "ngay_cap_phat, ngay_du_kien_tra, nguoi_cap_phat, trang_thai, ghi_chu) "
                         + "SELECT ?, ?, ?, nv.ma_nhan_vien, nv.ma_phong_ban, ?, ?, ?, ?, ? "
                         + "FROM nhan_vien nv WHERE nv.ma_nhan_vien = ?";
-                try (PreparedStatement ps = c.prepareStatement(sql)) {
+                
+                try (PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setString(1, cp.maCode());
                     JdbcUtil.setInt(ps, 2, cp.maTaiSan());
                     JdbcUtil.setInt(ps, 3, cp.maThietBi());
@@ -70,6 +73,10 @@ public class CapPhatDAO {
                     ps.setString(8, cp.ghiChu());
                     ps.setInt(9, cp.maNhanVien());
                     ps.executeUpdate();
+                    
+                    try (ResultSet keys = ps.getGeneratedKeys()) {
+                        if (keys.next()) newId = keys.getInt(1);
+                    }
                 }
                 c.commit();
             } catch (SQLException | RuntimeException e) {
@@ -79,6 +86,7 @@ public class CapPhatDAO {
         } catch (SQLException e) {
             throw JdbcUtil.translate(e);
         }
+        return newId;
     }
 
     /** Ghi nhận trả: đóng phiếu và đưa tài sản/thiết bị về kho - trong cùng một transaction. */
@@ -122,10 +130,6 @@ public class CapPhatDAO {
         }
     }
 
-    /**
-     * Cập nhật trạng thái (và tùy chọn tình trạng) của tài sản hoặc thiết bị.
-     * Nếu requiredStatus != null thì chỉ cập nhật khi trạng thái hiện tại khớp (chống cấp phát trùng).
-     */
     private int setAssetStatus(Connection c, Integer maTs, Integer maTb, String newStatus,
                                String tinhTrang, String requiredStatus) throws SQLException {
         boolean isTs = maTs != null;

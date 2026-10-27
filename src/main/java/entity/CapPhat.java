@@ -6,4 +6,4 @@ public record CapPhat(Integer maCapPhat, String maCode, Integer maTaiSan, Intege
                       String tenDoiTuong, Integer maNhanVien, String tenNhanVien,
                       LocalDate ngayCapPhat, LocalDate ngayDuKienTra, LocalDate ngayTraThucTe,
                       String tinhTrangKhiTra, String trangThai, String ghiChu) {}
-//kkk
+

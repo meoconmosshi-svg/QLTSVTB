@@ -21,7 +21,8 @@ public class CapPhatPanel extends CrudPanel<CapPhat> {
 
     public CapPhatPanel() {
         super(new String[]{"Mã phiếu", "Tài sản / Thiết bị", "Nhân viên", "Ngày cấp phát",
-                "Dự kiến trả", "Ngày trả", "Tình trạng khi trả", "Trạng thái"}, false);
+                "Dự kiến trả", "Ngày trả", "Tình trạng khi trả", "Trạng thái", "Ghi chú"}, false);
+                
         if (Session.canModify()) {
             JButton btnCap = new JButton("Cấp phát");
             JButton btnTra = new JButton("Ghi nhận trả");
@@ -36,15 +37,30 @@ public class CapPhatPanel extends CrudPanel<CapPhat> {
     @Override protected List<CapPhat> load(String keyword) { return bus.search(keyword); }
 
     @Override protected Object[] toRow(CapPhat c) {
-        return new Object[]{c.maCode(), Parse.nz(c.tenDoiTuong()), c.tenNhanVien(), Parse.fmt(c.ngayCapPhat()),
-                Parse.fmt(c.ngayDuKienTra()), Parse.fmt(c.ngayTraThucTe()), Parse.nz(c.tinhTrangKhiTra()),
-                Parse.nz(c.trangThai())};
+        return new Object[]{
+                c.maCode(), 
+                Parse.nz(c.tenDoiTuong()), 
+                c.tenNhanVien(), 
+                Parse.fmt(c.ngayCapPhat()),
+                Parse.fmt(c.ngayDuKienTra()), 
+                Parse.fmt(c.ngayTraThucTe()), 
+                Parse.nz(c.tinhTrangKhiTra()),
+                Parse.nz(c.trangThai()),
+                Parse.nz(c.ghiChu()) // Thêm cột ghi chú để thấy dòng [YC: ...]
+        };
     }
 
     private void cap() {
         try {
-            CapPhatDialog d = new CapPhatDialog(SwingUtilities.getWindowAncestor(this), bus,
-                    taiSanBus.findAvailable(), thietBiBus.findAvailable(), bus.allEmployees());
+            // 🔥 Sửa dòng này: Thêm chữ null ở cuối vì tạo độc lập không qua Yêu Cầu
+            CapPhatDialog d = new CapPhatDialog(
+                    SwingUtilities.getWindowAncestor(this), 
+                    bus,
+                    taiSanBus.findAvailable(), 
+                    thietBiBus.findAvailable(), 
+                    bus.allEmployees(),
+                    null 
+            );
             if (d.open()) refresh();
         } catch (RuntimeException ex) {
             Dialogs.error(this, ex);

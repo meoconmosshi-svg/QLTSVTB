@@ -23,8 +23,8 @@ public class CapPhatBUS {
 
     public List<NhanVien> allEmployees() { return nhanVienDao.search(""); }
 
-    /** Cấp phát đúng MỘT trong hai: tài sản hoặc thiết bị. */
-    public void capPhat(Integer maTaiSan, Integer maThietBi, NhanVien nv,
+    /** Cấp phát đúng MỘT trong hai: tài sản hoặc thiết bị. Trả về mã cấp phát. */
+    public int capPhat(Integer maTaiSan, Integer maThietBi, NhanVien nv,
                         LocalDate ngayCap, LocalDate ngayDuKienTra, String ghiChu) {
         Session.requireModify();
         if ((maTaiSan == null) == (maThietBi == null)) {
@@ -35,11 +35,15 @@ public class CapPhatBUS {
         if (ngayDuKienTra != null && ngayDuKienTra.isBefore(ngayCap)) {
             throw new BusinessException("Ngày dự kiến trả không được trước ngày cấp phát.");
         }
+        
         String code = "CP" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmssSSS"));
         CapPhat cp = new CapPhat(null, code, maTaiSan, maThietBi, null, nv.maNhanVien(), nv.hoTen(),
                 ngayCap, ngayDuKienTra, null, null, Constants.CP_DANG_SU_DUNG, ghiChu);
-        dao.capPhat(cp, Session.userId());
+                
+        int maCapPhat = dao.capPhat(cp, Session.userId());
+        
         nhatKy.ghi("CẤP PHÁT", "CAP_PHAT", code, "Cấp phát cho " + nv.hoTen());
+        return maCapPhat;
     }
 
     public void tra(CapPhat cp, LocalDate ngayTra, String tinhTrang) {

@@ -270,15 +270,44 @@ public class YeuCauPanel extends JPanel {
         } catch (RuntimeException ex) { Dialogs.error(this, ex); }
     }
 
+    // Thay thế hàm capPhat() cũ bằng hàm này:
+
     private void capPhat() {
-        YeuCauCapPhat y = selected(); if (y == null) return;
+        YeuCauCapPhat y = selected(); 
+        if (y == null) return;
+        
+        // Chỉ cho phép cấp phát khi đã duyệt
         if (!y.daDuyet()) {
             Dialogs.warn(this, "Chỉ cấp phát cho yêu cầu đã được duyệt.");
             return;
         }
-        JOptionPane.showMessageDialog(this,
-                "Chức năng cấp phát nhanh cho yêu cầu " + y.maYcCode() + "\n"
-                + "Hãy vào tab 'Cấp phát' để tạo phiếu và liên kết với yêu cầu này.",
-                "Hướng dẫn", JOptionPane.INFORMATION_MESSAGE);
+
+        try {
+            com.qlts.bus.CapPhatBUS capPhatBus = new com.qlts.bus.CapPhatBUS();
+            com.qlts.bus.TaiSanBUS taiSanBus = new com.qlts.bus.TaiSanBUS();
+            com.qlts.bus.ThietBiBUS thietBiBus = new com.qlts.bus.ThietBiBUS();
+
+            // Mở Dialog Cấp Phát, truyền Yêu cầu vào để form tự điền
+            CapPhatDialog d = new CapPhatDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    capPhatBus,
+                    taiSanBus.findAvailable(),
+                    thietBiBus.findAvailable(),
+                    capPhatBus.allEmployees(),
+                    y
+            );
+            
+            if (d.open()) {
+                Integer maCapPhat = d.getMaCapPhatKetQua();
+                if (maCapPhat != null && maCapPhat > 0) {
+                    // 🔥 CẬP NHẬT TRẠNG THÁI YÊU CẦU THÀNH "ĐÃ CẤP"
+                    bus.danhDauDaCap(y, maCapPhat);
+                    Dialogs.info(this, "Đã tạo phiếu cấp phát!\nTrạng thái yêu cầu chuyển thành 'Đã cấp'.");
+                    refresh(); 
+                }
+            }
+        } catch (RuntimeException ex) {
+            Dialogs.error(this, ex);
+        }
     }
 }
