@@ -73,8 +73,8 @@ public class MainFrame extends JFrame {
 
             // TODO Đợt 5 — bỏ comment khi có panel:
             tabs.addTab("Điều chuyển",  new DieuChuyenPanel());
-            // tabs.addTab("Bảo trì",      new BaoTriPanel());
-            // tabs.addTab("Kiểm kê",     new KiemKePanel());
+            tabs.addTab("Bảo trì",      new BaoTriPanel());
+            tabs.addTab("Kiểm kê",     new KiemKePanel());
             // tabs.addTab("Thanh lý",    new ThanhLyPanel());
             // tabs.addTab("Khấu hao",    new KhauHaoPanel());
 
@@ -88,6 +88,8 @@ public class MainFrame extends JFrame {
             tabs.addTab("Tài sản",     new TaiSanPanel());
             tabs.addTab("Thiết bị",     new ThietBiPanel());
             tabs.addTab("Yêu cầu",      new YeuCauPanel());
+            tabs.addTab("Bảo trì",      new BaoTriPanel());
+            tabs.addTab("Kiểm kê",     new KiemKePanel());
             tabs.addTab("Cài đặt",       new CaiDatPanel());
         }
 

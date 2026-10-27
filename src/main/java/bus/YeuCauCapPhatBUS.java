@@ -17,23 +17,22 @@ public class YeuCauCapPhatBUS {
 
     /**
      * Danh sách yêu cầu theo role:
-     *  - Admin + Nhân viên: xem TẤT CẢ (để duyệt)
-     *  - Khách hàng: chỉ xem yêu cầu của chính mình
+     *  - Admin: xem TẤT CẢ (để duyệt)
+     *  - Nhân viên: CHỈ xem yêu cầu của chính mình
      */
     public List<YeuCauCapPhat> search(String keyword, String trangThai) {
-        Integer filter = (Session.canModify() || Session.isNhanVien())
-                ? null
-                : Session.userId();
+        // 🔥 Admin xem hết (null), Nhân viên chỉ xem của mình (userId)
+        Integer filter = Session.isAdmin() ? null : Session.userId();
         return dao.search(keyword, trangThai, filter);
     }
 
-    /** Đếm số yêu cầu chờ duyệt (cho Admin + Nhân viên). */
+    /** Đếm số yêu cầu chờ duyệt (cho Admin). */
     public int countChoDuyet() {
-        if (!Session.canApprove()) return 0;
+        if (!Session.isAdmin()) return 0;
         return dao.countChoDuyet();
     }
 
-    /** Nhân viên / Khách hàng gửi yêu cầu. */
+    /** Nhân viên gửi yêu cầu. */
     public void guiYeuCau(Integer maLoai, int soLuong, String lyDo,
                           LocalDate ngayMongMuon, String loaiYeuCau, String ghiChu) {
         if (maLoai == null) throw new BusinessException("Vui lòng chọn loại tài sản.");
@@ -63,43 +62,24 @@ public class YeuCauCapPhatBUS {
                 "Gửi yêu cầu " + loaiYeuCau + ": " + code);
     }
 
-    /**
-     * Duyệt yêu cầu.
-     * - Admin: duyệt mọi yêu cầu (kể cả của chính mình)
-     * - Nhân viên: duyệt yêu cầu của KH và NV khác, KHÔNG tự duyệt yêu cầu của mình
-     */
+    /** Duyệt yêu cầu (Chỉ Admin). */
     public void duyet(YeuCauCapPhat y) {
         if (!Session.canApprove())
-            throw new BusinessException("Chỉ Admin hoặc Nhân viên được duyệt yêu cầu.");
+            throw new BusinessException("Chỉ ADMIN được duyệt yêu cầu.");
         if (!y.choDuyet())
             throw new BusinessException("Chỉ duyệt được yêu cầu đang chờ.");
 
-        // Nhân viên KHÔNG được tự duyệt yêu cầu của chính mình
-        if (Session.isNhanVien() && y.maTaiKhoan() == Session.userId()) {
-            throw new BusinessException("Không thể tự duyệt yêu cầu của chính mình.");
-        }
-
         dao.duyet(y.maYeuCau(), Session.userId());
         nhatKy.ghi("DUYỆT YC", "YEU_CAU", y.maYcCode(),
-                "Duyệt yêu cầu: " + y.maYcCode()
-                + " bởi " + Session.current().tenDangNhap());
+                "Duyệt yêu cầu: " + y.maYcCode());
     }
 
-    /**
-     * Từ chối yêu cầu.
-     * - Admin: từ chối mọi yêu cầu
-     * - Nhân viên: từ chối yêu cầu của KH và NV khác, KHÔNG tự từ chối yêu cầu của mình
-     */
+    /** Từ chối yêu cầu (Chỉ Admin). */
     public void tuChoi(YeuCauCapPhat y, String lyDo) {
         if (!Session.canApprove())
-            throw new BusinessException("Chỉ Admin hoặc Nhân viên được từ chối yêu cầu.");
+            throw new BusinessException("Chỉ ADMIN được từ chối yêu cầu.");
         if (!y.choDuyet())
             throw new BusinessException("Chỉ từ chối được yêu cầu đang chờ.");
-
-        // Nhân viên KHÔNG được tự từ chối yêu cầu của chính mình
-        if (Session.isNhanVien() && y.maTaiKhoan() == Session.userId()) {
-            throw new BusinessException("Không thể tự từ chối yêu cầu của chính mình.");
-        }
 
         dao.tuChoi(y.maYeuCau(), Session.userId(), lyDo);
         nhatKy.ghi("TỪ CHỐI YC", "YEU_CAU", y.maYcCode(),
