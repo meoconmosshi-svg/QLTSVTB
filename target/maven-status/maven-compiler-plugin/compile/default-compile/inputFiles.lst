@@ -9,7 +9,9 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\NguoiDungBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\NhanVienBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\NhatKyBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\PhieuNhapKhoBUS.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\PhongBanBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\TaiSanBUS.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\ThanhLyBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\ThietBiBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\ThongKeBUS.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\bus\YeuCauCapPhatBUS.java
@@ -34,8 +36,10 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\NguoiDungDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\NhanVienDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\NhatKyDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\PhieuNhapKhoDAO.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\PhongBanDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\TaiKhoanDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\TaiSanDAO.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\ThanhLyDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\ThietBiDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\ThongKeDAO.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\dao\YeuCauCapPhatDAO.java
@@ -53,6 +57,7 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\PhieuNhapKho.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\PhongBan.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\TaiKhoan.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\TaiSan.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\ThanhLy.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\ThietBi.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\entity\YeuCauCapPhat.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\util\EmailUtil.java
@@ -80,9 +85,13 @@ E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\NhanVienPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\NhapKhoDialog.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\NhapKhoPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\NhatKyPanel.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\PhongBanDialog.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\PhongBanPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\QuanLyNguoiDungPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\TaiSanDialog.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\TaiSanPanel.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\ThanhLyDialog.java
+E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\ThanhLyPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\ThietBiDialog.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\ThietBiPanel.java
 E:\CNGTVT-VY\code-java\QLTSVTB\src\main\java\view\TraDialog.java

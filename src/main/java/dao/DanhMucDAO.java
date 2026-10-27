@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Các danh mục dùng cho combobox: loại tài sản, nhà cung cấp, phòng ban. */
 public class DanhMucDAO {
 
     public List<LoaiTaiSan> loaiTaiSan() {
@@ -32,8 +31,19 @@ public class DanhMucDAO {
 
     public List<PhongBan> phongBan() {
         List<PhongBan> list = new ArrayList<>();
-        query("SELECT ma_phong_ban, ten_phong_ban FROM phong_ban ORDER BY ten_phong_ban",
-                rs -> list.add(new PhongBan(rs.getInt(1), rs.getString(2))));
+        String sql = "SELECT pb.ma_phong_ban, pb.ten_phong_ban, pb.ma_phong_ban_code, "
+                   + "pb.dia_diem, pb.ma_quan_ly, pb.ngay_thanh_lap, tk.ho_ten AS ten_quan_ly "
+                   + "FROM phong_ban pb LEFT JOIN tai_khoan tk ON pb.ma_quan_ly = tk.ma_tai_khoan "
+                   + "ORDER BY pb.ten_phong_ban";
+        query(sql, rs -> list.add(new PhongBan(
+                rs.getInt("ma_phong_ban"),
+                rs.getString("ten_phong_ban"),
+                rs.getString("ma_phong_ban_code"),
+                rs.getString("dia_diem"),
+                JdbcUtil.getInt(rs, "ma_quan_ly"),
+                JdbcUtil.getDate(rs, "ngay_thanh_lap"),
+                rs.getString("ten_quan_ly")
+        )));
         return list;
     }
 
