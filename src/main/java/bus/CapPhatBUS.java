@@ -20,10 +20,13 @@ public class CapPhatBUS {
     private final NhatKyDAO nhatKy = new NhatKyDAO();
 
     public List<CapPhat> search(String keyword) { return dao.search(keyword); }
-
     public List<NhanVien> allEmployees() { return nhanVienDao.search(""); }
+    
+    // 🔥 THÊM HÀM NÀY ĐỂ FIX LỖI
+    public CapPhat getCurrentHolder(Integer maTaiSan, Integer maThietBi) {
+        return dao.getCurrentHolder(maTaiSan, maThietBi);
+    }
 
-    /** Cấp phát đúng MỘT trong hai: tài sản hoặc thiết bị. Trả về mã cấp phát. */
     public int capPhat(Integer maTaiSan, Integer maThietBi, NhanVien nv,
                         LocalDate ngayCap, LocalDate ngayDuKienTra, String ghiChu) {
         Session.requireModify();

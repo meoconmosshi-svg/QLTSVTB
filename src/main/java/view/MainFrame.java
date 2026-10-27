@@ -64,31 +64,31 @@ public class MainFrame extends JFrame {
 
         if (Session.isAdmin()) {
             // ====================== ADMIN ======================
-            tabs.addTab("🏷 Tài sản",     new TaiSanPanel());
-            tabs.addTab("💻 Thiết bị",     new ThietBiPanel());
-            tabs.addTab("👥 Nhân viên",    new NhanVienPanel());
-            tabs.addTab("📦 Cấp phát",     new CapPhatPanel());
-            tabs.addTab("📨 Yêu cầu",      new YeuCauPanel());
-            tabs.addTab("📥 Nhập kho",     new NhapKhoPanel());
+            tabs.addTab("Tài sản",     new TaiSanPanel());
+            tabs.addTab("Thiết bị",     new ThietBiPanel());
+            tabs.addTab("Nhân viên",    new NhanVienPanel());
+            tabs.addTab("Cấp phát",     new CapPhatPanel());
+            tabs.addTab("Yêu cầu",      new YeuCauPanel());
+            tabs.addTab("Nhập kho",     new NhapKhoPanel());
 
             // TODO Đợt 5 — bỏ comment khi có panel:
-            // tabs.addTab("🔄 Điều chuyển",  new DieuChuyenPanel());
-            // tabs.addTab("🔧 Bảo trì",      new BaoTriPanel());
-            // tabs.addTab("📋 Kiểm kê",     new KiemKePanel());
-            // tabs.addTab("🗑 Thanh lý",    new ThanhLyPanel());
-            // tabs.addTab("📉 Khấu hao",    new KhauHaoPanel());
+            tabs.addTab("Điều chuyển",  new DieuChuyenPanel());
+            // tabs.addTab("Bảo trì",      new BaoTriPanel());
+            // tabs.addTab("Kiểm kê",     new KiemKePanel());
+            // tabs.addTab("Thanh lý",    new ThanhLyPanel());
+            // tabs.addTab("Khấu hao",    new KhauHaoPanel());
 
-            tabs.addTab("📊 Báo cáo",      new BaoCaoThongKePanel());
-            tabs.addTab("📜 Nhật ký",      new NhatKyPanel());
-            tabs.addTab("⚙️ Cài đặt",       new CaiDatPanel());
+            tabs.addTab("Báo cáo",      new BaoCaoThongKePanel());
+            tabs.addTab("Nhật ký",      new NhatKyPanel());
+            tabs.addTab("Cài đặt",       new CaiDatPanel());
 
         } else {
             // ====================== NHÂN VIÊN ======================
             // Chỉ xem + gửi yêu cầu (không có nút thêm/sửa/xóa)
-            tabs.addTab("🏷 Tài sản",     new TaiSanPanel());
-            tabs.addTab("💻 Thiết bị",     new ThietBiPanel());
-            tabs.addTab("📨 Yêu cầu",      new YeuCauPanel());
-            tabs.addTab("⚙️ Cài đặt",       new CaiDatPanel());
+            tabs.addTab("Tài sản",     new TaiSanPanel());
+            tabs.addTab("Thiết bị",     new ThietBiPanel());
+            tabs.addTab("Yêu cầu",      new YeuCauPanel());
+            tabs.addTab("Cài đặt",       new CaiDatPanel());
         }
 
         setLayout(new BorderLayout());

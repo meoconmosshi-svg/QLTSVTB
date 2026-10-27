@@ -62,6 +62,12 @@ public class TaiSanDAO {
             throw JdbcUtil.translate(e);
         }
     }
+    
+        /** Tài sản đang được sử dụng (có thể điều chuyển/bàn giao). */
+    public List<TaiSan> findInUse() {
+        return query(SELECT + "WHERE t.trang_thai = ? ORDER BY t.ten_tai_san",
+                Constants.TS_DANG_SU_DUNG, 1);
+    }
 
     public void delete(int id) {
         try (Connection c = DBConnection.getConnection();

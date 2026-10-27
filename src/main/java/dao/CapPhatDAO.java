@@ -149,4 +149,30 @@ public class CapPhatDAO {
             return ps.executeUpdate();
         }
     }
+    
+        /** Lấy phiếu cấp phát đang active của tài sản/thiết bị */
+    public CapPhat getCurrentHolder(Integer maTs, Integer maTb) {
+        String sql = "SELECT c.*, nv.ho_ten FROM cap_phat c "
+                   + "JOIN nhan_vien nv ON c.ma_nhan_vien = nv.ma_nhan_vien "
+                   + "WHERE c.trang_thai = N'Đang sử dụng' AND ";
+        if (maTs != null) sql += "c.ma_tai_san = ?";
+        else sql += "c.ma_thiet_bi = ?";
+        
+        try (Connection c = DBConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, maTs != null ? maTs : maTb);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new CapPhat(rs.getInt("ma_cap_phat"), rs.getString("ma_cp_code"),
+                            JdbcUtil.getInt(rs, "ma_tai_san"), JdbcUtil.getInt(rs, "ma_thiet_bi"), null,
+                            rs.getInt("ma_nhan_vien"), rs.getString("ho_ten"),
+                            JdbcUtil.getDate(rs, "ngay_cap_phat"), JdbcUtil.getDate(rs, "ngay_du_kien_tra"),
+                            JdbcUtil.getDate(rs, "ngay_tra_thuc_te"), rs.getString("tinh_trang_khi_tra"),
+                            rs.getString("trang_thai"), rs.getString("ghi_chu"));
+                }
+            }
+        } catch (SQLException e) {
+            throw JdbcUtil.translate(e);
+        }
+        return null;
+    }
 }

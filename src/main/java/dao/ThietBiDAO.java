@@ -29,6 +29,12 @@ public class ThietBiDAO {
         return query(SELECT + "WHERE t.trang_thai = ? ORDER BY t.ten_thiet_bi",
                 Constants.TS_TRONG_KHO, 1);
     }
+    
+        /** Thiết bị đang được sử dụng (có thể điều chuyển/bàn giao). */
+    public List<ThietBi> findInUse() {
+        return query(SELECT + "WHERE t.trang_thai = ? ORDER BY t.ten_thiet_bi",
+                Constants.TS_DANG_SU_DUNG, 1);
+    }
 
     // ============================================================
     // CRUD (có so_luong + hinh_anh)

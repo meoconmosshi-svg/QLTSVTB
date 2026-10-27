@@ -15,6 +15,9 @@ public class ThietBiBUS {
 
     public List<ThietBi> search(String keyword) { return dao.search(keyword); }
     public List<ThietBi> findAvailable() { return dao.findAvailable(); }
+    
+    // 🔥 THÊM HÀM NÀY ĐỂ FIX LỖI
+    public List<ThietBi> findInUse() { return dao.findInUse(); }
 
     public void save(ThietBi t) {
         Session.requireModify();

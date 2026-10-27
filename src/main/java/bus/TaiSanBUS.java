@@ -1,4 +1,4 @@
- package com.qlts.bus;
+package com.qlts.bus;
 
 import com.qlts.common.BusinessException;
 import com.qlts.common.Constants;
@@ -15,6 +15,9 @@ public class TaiSanBUS {
 
     public List<TaiSan> search(String keyword) { return dao.search(keyword); }
     public List<TaiSan> findAvailable() { return dao.findAvailable(); }
+    
+    // 🔥 THÊM HÀM NÀY ĐỂ FIX LỖI
+    public List<TaiSan> findInUse() { return dao.findInUse(); }
 
     public void save(TaiSan t) {
         Session.requireModify();

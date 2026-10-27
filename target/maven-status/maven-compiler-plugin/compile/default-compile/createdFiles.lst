@@ -11,6 +11,7 @@ com\qlts\bus\NhatKyBUS.class
 com\qlts\entity\CapPhat.class
 com\qlts\view\LoginFrame.class
 com\qlts\common\BusinessException.class
+com\qlts\view\DieuChuyenDialog$Item.class
 com\qlts\view\MainFrame.class
 com\qlts\view\NhapKhoDialog.class
 com\qlts\dao\NguoiDungDAO$UserFull.class
@@ -20,6 +21,7 @@ com\qlts\common\Session.class
 com\qlts\view\ForgotPasswordDialog.class
 com\qlts\view\ThietBiPanel.class
 com\qlts\dao\ThongKeDAO.class
+com\qlts\view\DieuChuyenPanel.class
 com\qlts\view\NhapKhoPanel$1.class
 com\qlts\entity\PhongBan.class
 com\qlts\entity\NhatKy.class
@@ -36,6 +38,8 @@ com\qlts\view\NhapKhoPanel$2.class
 com\qlts\common\Constants.class
 com\qlts\dao\CauHinhDAO.class
 com\qlts\view\YeuCauPanel$2.class
+com\qlts\view\DieuChuyenDialog.class
+com\qlts\dao\DieuChuyenDAO.class
 com\qlts\view\LoginFrame$GradientPanel.class
 com\qlts\entity\LoaiTaiSan.class
 com\qlts\dao\NhanVienDAO.class
@@ -53,6 +57,7 @@ com\qlts\view\QuanLyNguoiDungPanel.class
 com\qlts\entity\TaiSan.class
 com\qlts\util\OtpUtil.class
 com\qlts\view\YeuCauPanel.class
+com\qlts\entity\DieuChuyen.class
 com\qlts\common\Theme.class
 com\qlts\dao\DanhMucDAO.class
 com\qlts\view\ThietBiDialog.class
@@ -64,6 +69,7 @@ com\qlts\bus\TaiSanBUS.class
 com\qlts\view\CapPhatDialog$Item.class
 com\qlts\entity\YeuCauCapPhat.class
 com\qlts\component\Combos.class
+com\qlts\view\DieuChuyenDialog$2.class
 com\qlts\view\QuanLyNguoiDungPanel$2.class
 com\qlts\view\NhatKyPanel.class
 com\qlts\bus\CapPhatBUS.class
@@ -75,6 +81,7 @@ com\qlts\view\NhapKhoPanel.class
 com\qlts\view\BaoCaoThongKePanel.class
 com\qlts\view\NhanVienDialog.class
 com\qlts\dao\ThongKeDAO$TopBanChay.class
+com\qlts\view\DieuChuyenDialog$1.class
 com\qlts\util\PasswordUtil.class
 com\qlts\bus\DanhMucBUS.class
 com\qlts\dao\YeuCauCapPhatDAO.class
@@ -85,6 +92,7 @@ com\qlts\dao\DanhMucDAO$RowHandler.class
 com\qlts\bus\ThietBiBUS.class
 com\qlts\util\JdbcUtil.class
 com\qlts\view\NguoiDungDialog.class
+com\qlts\bus\DieuChuyenBUS.class
 com\qlts\dao\ThietBiDAO.class
 com\qlts\entity\ChiTietPhieuNhap.class
 com\qlts\view\TaiSanPanel.class
