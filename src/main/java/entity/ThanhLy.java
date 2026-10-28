@@ -14,7 +14,8 @@ public record ThanhLy(
         Integer nguoiDuyet,
         String trangThai, 
         String ghiChu,
-        // Hai trường dưới đây dùng để JOIN dữ liệu hiển thị lên bảng
+        Integer nguoiTao,     // 🔥 Thêm
         String tenDoiTuong, 
-        String tenNguoiDuyet) {
+        String tenNguoiDuyet, 
+        String tenNguoiTao) { // 🔥 Thêm
 }

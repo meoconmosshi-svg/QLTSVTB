@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
     private JLabel lblUser;
     private JPanel contentPanel;
     private CardLayout cardLayout;
-    
+
     // Quản lý trạng thái nút đang được chọn
     private final List<JButton> menuButtons = new ArrayList<>();
     private JButton activeButton;
@@ -84,37 +84,43 @@ public class MainFrame extends JFrame {
         if (Session.isAdmin()) {
             // ================= ADMIN =================
             addMenuGroup(sidebar, "QUẢN LÝ TÀI SẢN");
-            addMenu(sidebar, "Tài sản",      new TaiSanPanel());
-            addMenu(sidebar, "Thiết bị",     new ThietBiPanel());
-            addMenu(sidebar, "Phòng ban",    new PhongBanPanel());
-            addMenu(sidebar, "Nhân viên",    new NhanVienPanel());
+            addMenu(sidebar, "Tài sản", new TaiSanPanel());
+            addMenu(sidebar, "Thiết bị", new ThietBiPanel());
+            addMenu(sidebar, "Phòng ban", new PhongBanPanel());
+            addMenu(sidebar, "Nhân viên", new NhanVienPanel());
 
             addMenuGroup(sidebar, "NGHIỆP VỤ");
-            addMenu(sidebar, "Cấp phát",     new CapPhatPanel());
-            addMenu(sidebar, "Điều chuyển",  new DieuChuyenPanel());
-            addMenu(sidebar, "Yêu cầu",      new YeuCauPanel());
-            addMenu(sidebar, "Nhập kho",     new NhapKhoPanel());
-            addMenu(sidebar, "📉 Khấu hao",     new KhauHaoPanel());
-            addMenu(sidebar, "Bảo trì",      new BaoTriPanel());
-            addMenu(sidebar, "Kiểm kê",      new KiemKePanel());
-            addMenu(sidebar, "Thanh lý",     new ThanhLyPanel());
+            addMenu(sidebar, "Cấp phát", new CapPhatPanel());
+            addMenu(sidebar, "Điều chuyển", new DieuChuyenPanel());
+            addMenu(sidebar, "Yêu cầu", new YeuCauPanel());
+            //addMenu(sidebar, "Nhập kho", new NhapKhoPanel());
+            addMenu(sidebar, "Khấu hao", new KhauHaoPanel());
+            addMenu(sidebar, "Bảo trì", new BaoTriPanel());
+            addMenu(sidebar, "Kiểm kê", new KiemKePanel());
+            addMenu(sidebar, "Thanh lý", new ThanhLyPanel());
 
             addMenuGroup(sidebar, "HỆ THỐNG");
-            addMenu(sidebar, "Báo cáo",      new BaoCaoThongKePanel());
-            addMenu(sidebar, "Nhật ký",      new NhatKyPanel());
-            addMenu(sidebar, "Cài đặt",       new CaiDatPanel());
+            addMenu(sidebar, "Báo cáo", new BaoCaoThongKePanel());
+            addMenu(sidebar, "Nhật ký", new NhatKyPanel());
+            addMenu(sidebar, "Cài đặt", new CaiDatPanel());
+
+            addMenuGroup(sidebar, "QUẢN LÝ TÀI SẢN");
+            addMenu(sidebar, "🏷 Loại tài sản", new LoaiTaiSanPanel()); // 🔥 THÊM
+            
+            // ... các tab cũ
         } else {
             // ================= NHÂN VIÊN =================
             addMenuGroup(sidebar, "TRA CỨU");
-            addMenu(sidebar, "Tài sản",      new TaiSanPanel());
-            addMenu(sidebar, "Thiết bị",     new ThietBiPanel());
+            addMenu(sidebar, "Tài sản của tôi", new TaiSanCuaToiPanel());
+            addMenu(sidebar, "Tài sản", new TaiSanPanel());
+            addMenu(sidebar, "Thiết bị", new ThietBiPanel());
 
             addMenuGroup(sidebar, "YÊU CẦU CỦA TÔI");
-            addMenu(sidebar, "Yêu cầu cấp",  new YeuCauPanel());
-            addMenu(sidebar, "Báo hỏng/BT",  new BaoTriPanel());
-
+            addMenu(sidebar, "Yêu cầu cấp", new YeuCauPanel());
+            addMenu(sidebar, "Báo hỏng/BT", new BaoTriPanel());
+            addMenu(sidebar, "Đề xuất thanh lý", new ThanhLyPanel());
             addMenuGroup(sidebar, "TÀI KHOẢN");
-            addMenu(sidebar, "Cài đặt",       new CaiDatPanel());
+            addMenu(sidebar, "Cài đặt", new CaiDatPanel());
         }
 
         // Đẩy menu lên trên cùng (khoảng trống dư ra ở dưới)
@@ -162,7 +168,7 @@ public class MainFrame extends JFrame {
      * Thêm 1 nút vào Sidebar và 1 Panel tương ứng vào Content
      */
     private void addMenu(JPanel sidebar, String title, JPanel panel) {
-        String cardName = title; 
+        String cardName = title;
         contentPanel.add(panel, cardName);
 
         JButton btn = new JButton(title);
@@ -172,11 +178,11 @@ public class MainFrame extends JFrame {
         btn.setPreferredSize(new Dimension(220, 42));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setFocusPainted(false);
-        
+
         // 🔥 Style FlatLaf: Bo góc, không viền, khoảng cách trong đẹp
-        btn.putClientProperty(FlatClientProperties.STYLE, 
+        btn.putClientProperty(FlatClientProperties.STYLE,
                 "arc:10; borderWidth:0; focusWidth:0; innerFocusWidth:0; margin:0,10,0,10;");
-        
+
         btn.setBackground(Color.WHITE); // Nền trắng nổi bật trên nền xám
         btn.setForeground(new Color(0x333333)); // Chữ xám đậm
         btn.setBorder(new EmptyBorder(0, 15, 0, 15));
@@ -195,6 +201,7 @@ public class MainFrame extends JFrame {
                     btn.setForeground(Theme.primary());
                 }
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 if (activeButton != btn) {
                     btn.setBackground(Color.WHITE);
@@ -225,7 +232,9 @@ public class MainFrame extends JFrame {
 
     public void refreshUserName() {
         TaiKhoan user = Session.current();
-        if (user == null) return;
+        if (user == null) {
+            return;
+        }
         String role = user.maQuyen() == 1 ? "QUẢN TRỊ VIÊN" : "NHÂN VIÊN";
         lblUser.setText("Xin chào, " + user.hoTen() + "  •  " + role);
     }

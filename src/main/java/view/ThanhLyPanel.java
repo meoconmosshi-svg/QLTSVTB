@@ -17,9 +17,10 @@ public class ThanhLyPanel extends CrudPanel<ThanhLy> {
     private final ThanhLyBUS bus = new ThanhLyBUS();
 
     public ThanhLyPanel() {
-        super(new String[]{"Mã TL", "Đối tượng", "Ngày TL", "Lý do", "Giá trị thu hồi", "Người duyệt", "Trạng thái"}, false);
+        // 🔥 Thêm cột "Người đề xuất"
+        super(new String[]{"Mã TL", "Đối tượng", "Ngày TL", "Lý do", "Giá trị thu hồi", "Người đề xuất", "Người duyệt", "Trạng thái"}, false);
         
-        JButton btnTao = new JButton("Yêu cầu TL");
+        JButton btnTao = new JButton(Session.isAdmin() ? "Yêu cầu TL" : "Đề xuất TL");
         JButton btnXoa = new JButton("Xóa phiếu");
         btnTao.addActionListener(e -> tao());
         btnXoa.addActionListener(e -> xoa());
@@ -40,12 +41,19 @@ public class ThanhLyPanel extends CrudPanel<ThanhLy> {
     @Override protected List<ThanhLy> load(String kw) { return bus.search(kw); }
     
     @Override protected Object[] toRow(ThanhLy t) {
-        return new Object[]{t.maTlCode(), Parse.nz(t.tenDoiTuong()), Parse.fmt(t.ngayThanhLy()),
-                Parse.nz(t.lyDo()), Parse.fmt(t.giaTriThuHoi()), Parse.nz(t.tenNguoiDuyet()), t.trangThai()};
+        return new Object[]{
+                t.maTlCode(), 
+                Parse.nz(t.tenDoiTuong()), 
+                Parse.fmt(t.ngayThanhLy()),
+                Parse.nz(t.lyDo()), 
+                Parse.fmt(t.giaTriThuHoi()), 
+                Parse.nz(t.tenNguoiTao()), // 🔥 Hiển thị người tạo
+                Parse.nz(t.tenNguoiDuyet()), 
+                t.trangThai()
+        };
     }
 
     private void tao() {
-        // 🔥 CHỈ LẤY NHỮNG TÀI SẢN CHƯA THANH LÝ
         List<com.qlts.entity.TaiSan> ts = new TaiSanBUS().search("").stream()
                 .filter(t -> !Constants.TS_THANH_LY.equals(t.trangThai())).toList();
         List<com.qlts.entity.ThietBi> tb = new ThietBiBUS().search("").stream()
@@ -57,10 +65,15 @@ public class ThanhLyPanel extends CrudPanel<ThanhLy> {
 
     private void xoa() {
         ThanhLy t = selected(); if (t == null) return;
-        if (!"Chờ duyệt".equals(t.trangThai()) && !Session.isAdmin()) {
-            Dialogs.warn(this, "Chỉ được xóa phiếu đang chờ duyệt.");
-            return;
+        
+        // Kiểm tra quyền xóa trước khi hỏi
+        if (!Session.isAdmin() && (t.nguoiTao() == null || t.nguoiTao() != Session.userId())) {
+            Dialogs.warn(this, "Chỉ được xóa đề xuất của chính mình."); return;
         }
+        if (!"Chờ duyệt".equals(t.trangThai()) && !Session.isAdmin()) {
+            Dialogs.warn(this, "Chỉ được xóa phiếu đang chờ duyệt."); return;
+        }
+
         if (Dialogs.confirm(this, "Xóa phiếu thanh lý " + t.maTlCode() + "?")) {
             try {
                 bus.xoa(t);

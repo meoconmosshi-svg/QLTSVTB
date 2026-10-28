@@ -1,6 +1,5 @@
 package com.qlts.dao;
 
-import com.qlts.common.BusinessException;
 import com.qlts.common.Constants;
 import com.qlts.conn.DBConnection;
 import com.qlts.entity.ThanhLy;
@@ -12,18 +11,30 @@ import java.util.List;
 
 public class ThanhLyDAO {
     private static final String SELECT = 
-            "SELECT t.*, COALESCE(ts.ten_tai_san, tb.ten_thiet_bi) AS ten_doi_tuong, tk.ho_ten AS ten_nguoi_duyet "
+            "SELECT t.*, COALESCE(ts.ten_tai_san, tb.ten_thiet_bi) AS ten_doi_tuong, "
+          + "tk.ho_ten AS ten_nguoi_duyet, tk2.ho_ten AS ten_nguoi_tao "
           + "FROM thanh_ly t "
           + "LEFT JOIN tai_san ts ON t.ma_tai_san = ts.ma_tai_san "
           + "LEFT JOIN thiet_bi tb ON t.ma_thiet_bi = tb.ma_thiet_bi "
-          + "LEFT JOIN tai_khoan tk ON t.nguoi_duyet = tk.ma_tai_khoan ";
+          + "LEFT JOIN tai_khoan tk ON t.nguoi_duyet = tk.ma_tai_khoan "
+          + "LEFT JOIN tai_khoan tk2 ON t.nguoi_tao = tk2.ma_tai_khoan "; // 🔥 Join thêm bảng tài khoản
 
-    public List<ThanhLy> search(String keyword) {
+    public List<ThanhLy> search(String keyword, Integer nguoiTaoFilter) {
         String like = JdbcUtil.like(keyword);
-        String sql = SELECT + "WHERE t.ma_tl_code LIKE ? OR t.ly_do LIKE ? ORDER BY t.ma_thanh_ly DESC";
+        StringBuilder sql = new StringBuilder(SELECT).append("WHERE (t.ma_tl_code LIKE ? OR t.ly_do LIKE ?) ");
+        
+        // Nếu có bộ lọc (Nhân viên chỉ xem phiếu mình tạo)
+        if (nguoiTaoFilter != null) {
+            sql.append("AND t.nguoi_tao = ? ");
+        }
+        sql.append("ORDER BY t.ma_thanh_ly DESC");
+
         List<ThanhLy> list = new ArrayList<>();
-        try (Connection c = DBConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, like); ps.setString(2, like);
+        try (Connection c = DBConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql.toString())) {
+            int i = 1;
+            ps.setString(i++, like); ps.setString(i++, like);
+            if (nguoiTaoFilter != null) ps.setInt(i++, nguoiTaoFilter);
+            
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     list.add(new ThanhLy(
@@ -31,8 +42,8 @@ public class ThanhLyDAO {
                         JdbcUtil.getInt(rs, "ma_tai_san"), JdbcUtil.getInt(rs, "ma_thiet_bi"),
                         JdbcUtil.getDate(rs, "ngay_thanh_ly"), rs.getString("ly_do"),
                         rs.getBigDecimal("gia_tri_thu_hoi"), JdbcUtil.getInt(rs, "nguoi_duyet"),
-                        rs.getString("trang_thai"), rs.getString("ghi_chu"),
-                        rs.getString("ten_doi_tuong"), rs.getString("ten_nguoi_duyet")
+                        rs.getString("trang_thai"), rs.getString("ghi_chu"), JdbcUtil.getInt(rs, "nguoi_tao"),
+                        rs.getString("ten_doi_tuong"), rs.getString("ten_nguoi_duyet"), rs.getString("ten_nguoi_tao")
                     ));
                 }
             }
@@ -41,8 +52,9 @@ public class ThanhLyDAO {
     }
 
     public void insert(ThanhLy t) {
-        String sql = "INSERT INTO thanh_ly(ma_tl_code, ma_tai_san, ma_thiet_bi, ngay_thanh_ly, ly_do, gia_tri_thu_hoi, trang_thai) "
-                   + "VALUES (?,?,?,?,?,?,N'Chờ duyệt')";
+        // 🔥 Thêm cột nguoi_tao vào câu INSERT
+        String sql = "INSERT INTO thanh_ly(ma_tl_code, ma_tai_san, ma_thiet_bi, ngay_thanh_ly, ly_do, gia_tri_thu_hoi, trang_thai, nguoi_tao) "
+                   + "VALUES (?,?,?,?,?,?,N'Chờ duyệt',?)";
         try (Connection c = DBConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, t.maTlCode());
             JdbcUtil.setInt(ps, 2, t.maTaiSan());
@@ -50,6 +62,7 @@ public class ThanhLyDAO {
             JdbcUtil.setDate(ps, 4, t.ngayThanhLy());
             ps.setString(5, t.lyDo());
             ps.setBigDecimal(6, t.giaTriThuHoi());
+            JdbcUtil.setInt(ps, 7, t.nguoiTao());
             ps.executeUpdate();
         } catch (SQLException e) { throw JdbcUtil.translate(e); }
     }

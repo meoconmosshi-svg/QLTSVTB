@@ -5,9 +5,9 @@ com\qlts\dao\NhatKyDAO.class
 com\qlts\entity\CauHinh.class
 com\qlts\view\KhauHaoPanel$2.class
 com\qlts\component\Dialogs.class
-com\qlts\view\NhapKhoDialog$ChiTietTableModel.class
 com\qlts\Main.class
 com\qlts\bus\AuthBUS.class
+com\qlts\bus\LoaiTaiSanBUS.class
 com\qlts\entity\TaiKhoan.class
 com\qlts\bus\NhatKyBUS.class
 com\qlts\entity\CapPhat.class
@@ -17,7 +17,6 @@ com\qlts\common\BusinessException.class
 com\qlts\view\DieuChuyenDialog$Item.class
 com\qlts\bus\PhongBanBUS.class
 com\qlts\view\MainFrame.class
-com\qlts\view\NhapKhoDialog.class
 com\qlts\dao\NguoiDungDAO$UserFull.class
 com\qlts\view\PhongBanDialog.class
 com\qlts\util\EmailUtil.class
@@ -30,7 +29,6 @@ com\qlts\bus\KiemKeBUS.class
 com\qlts\dao\ThongKeDAO.class
 com\qlts\view\BaoTriDialog$Item.class
 com\qlts\view\DieuChuyenPanel.class
-com\qlts\view\NhapKhoPanel$1.class
 com\qlts\entity\PhongBan.class
 com\qlts\entity\NhatKy.class
 com\qlts\component\CrudPanel$2.class
@@ -43,7 +41,6 @@ com\qlts\dao\TaiKhoanDAO.class
 com\qlts\bus\YeuCauCapPhatBUS.class
 com\qlts\view\BaoCaoThongKePanel$1.class
 com\qlts\entity\ThanhLy.class
-com\qlts\view\NhapKhoPanel$2.class
 com\qlts\common\Constants.class
 com\qlts\dao\CauHinhDAO.class
 com\qlts\view\YeuCauPanel$2.class
@@ -66,7 +63,6 @@ com\qlts\view\ThanhLyPanel.class
 com\qlts\entity\KhauHaoInfo.class
 com\qlts\bus\ThongKeBUS.class
 com\qlts\dao\CapPhatDAO.class
-com\qlts\view\NhapKhoPanel$3.class
 com\qlts\view\QuanLyNguoiDungPanel.class
 com\qlts\dao\PhongBanDAO.class
 com\qlts\entity\TaiSan.class
@@ -79,13 +75,14 @@ com\qlts\view\KiemKeDialog.class
 com\qlts\view\ThietBiDialog.class
 com\qlts\component\CrudPanel$3.class
 com\qlts\conn\DBConnection.class
-com\qlts\entity\PhieuNhapKho.class
+com\qlts\view\TaiSanCuaToiPanel$1.class
 com\qlts\dao\TaiSanDAO.class
 com\qlts\view\KiemKePanel.class
 com\qlts\bus\TaiSanBUS.class
 com\qlts\view\CapPhatDialog$Item.class
 com\qlts\view\BaoTriPanel.class
 com\qlts\entity\YeuCauCapPhat.class
+com\qlts\view\LoaiTaiSanDialog.class
 com\qlts\dao\ThanhLyDAO.class
 com\qlts\component\Combos.class
 com\qlts\view\DieuChuyenDialog$2.class
@@ -97,7 +94,6 @@ com\qlts\view\YeuCauDialog.class
 com\qlts\component\FormDialog.class
 com\qlts\view\KhauHaoPanel$3.class
 com\qlts\view\NhanVienPanel.class
-com\qlts\view\NhapKhoPanel.class
 com\qlts\view\BaoCaoThongKePanel.class
 com\qlts\view\NhanVienDialog.class
 com\qlts\bus\BaoTriBUS.class
@@ -108,6 +104,7 @@ com\qlts\view\KhauHaoPanel.class
 com\qlts\view\ThanhLyDialog$Item.class
 com\qlts\bus\DanhMucBUS.class
 com\qlts\view\PhongBanDialog$1.class
+com\qlts\dao\LoaiTaiSanDAO.class
 com\qlts\dao\YeuCauCapPhatDAO.class
 com\qlts\entity\KhauHao.class
 com\qlts\bus\KhauHaoBUS.class
@@ -117,19 +114,18 @@ com\qlts\component\CrudPanel$1.class
 com\qlts\dao\DanhMucDAO$RowHandler.class
 com\qlts\bus\ThietBiBUS.class
 com\qlts\util\JdbcUtil.class
+com\qlts\view\TaiSanCuaToiPanel.class
 com\qlts\view\NguoiDungDialog.class
 com\qlts\bus\DieuChuyenBUS.class
 com\qlts\dao\ThietBiDAO.class
 com\qlts\view\KhauHaoDialog.class
-com\qlts\entity\ChiTietPhieuNhap.class
 com\qlts\view\KiemKeDialog$Item.class
 com\qlts\view\ThanhLyDialog.class
 com\qlts\dao\KhauHaoDAO.class
+com\qlts\view\LoaiTaiSanPanel.class
 com\qlts\view\TaiSanPanel.class
 com\qlts\view\CapPhatDialog.class
 com\qlts\view\TraDialog.class
-com\qlts\bus\PhieuNhapKhoBUS.class
-com\qlts\dao\PhieuNhapKhoDAO.class
 com\qlts\dao\KiemKeDAO.class
 com\qlts\view\MainFrame$1.class
 com\qlts\entity\NhanVien.class
