@@ -1,4 +1,4 @@
-package dialog;
+package com.qlts.view;
 
 import com.qlts.bus.BaoTriBUS;
 import com.qlts.common.BusinessException;

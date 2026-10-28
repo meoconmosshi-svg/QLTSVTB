@@ -1,6 +1,5 @@
-package panel;
+package com.qlts.view;
 
-import dialog.PhongBanDialog;
 import com.qlts.bus.NguoiDungBUS;
 import com.qlts.bus.PhongBanBUS;
 import com.qlts.component.CrudPanel;

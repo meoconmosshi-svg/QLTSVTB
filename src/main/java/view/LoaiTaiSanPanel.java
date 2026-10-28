@@ -1,6 +1,5 @@
-package panel;
+package com.qlts.view;
 
-import dialog.LoaiTaiSanDialog;
 import com.qlts.bus.LoaiTaiSanBUS;
 import com.qlts.component.CrudPanel;
 import com.qlts.component.Dialogs;

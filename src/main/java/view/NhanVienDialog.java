@@ -1,4 +1,4 @@
-package dialog;
+package com.qlts.view;
 
 import com.qlts.bus.NhanVienBUS;
 import com.qlts.common.Constants;

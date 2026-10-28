@@ -9,7 +9,6 @@ com\qlts\Main.class
 com\qlts\bus\AuthBUS.class
 com\qlts\bus\LoaiTaiSanBUS.class
 com\qlts\entity\TaiKhoan.class
-com\qlts\view\KiemKeDialog$1.class
 com\qlts\bus\NhatKyBUS.class
 com\qlts\entity\CapPhat.class
 com\qlts\entity\KiemKe.class

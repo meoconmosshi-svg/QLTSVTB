@@ -1,7 +1,5 @@
-package panel;
+package com.qlts.view;
 
-import dialog.TraDialog;
-import dialog.CapPhatDialog;
 import com.qlts.bus.CapPhatBUS;
 import com.qlts.bus.TaiSanBUS;
 import com.qlts.bus.ThietBiBUS;

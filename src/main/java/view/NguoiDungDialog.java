@@ -1,4 +1,4 @@
-package dialog;
+package com.qlts.view;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.qlts.bus.NguoiDungBUS;

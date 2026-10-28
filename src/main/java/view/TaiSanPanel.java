@@ -1,6 +1,5 @@
-package panel;
+package com.qlts.view;
 
-import dialog.TaiSanDialog;
 import com.qlts.bus.DanhMucBUS;
 import com.qlts.bus.TaiSanBUS;
 import com.qlts.component.CrudPanel;

@@ -1,6 +1,5 @@
-package panel;
+package com.qlts.view;
 
-import dialog.DieuChuyenDialog;
 import com.qlts.bus.DanhMucBUS;
 import com.qlts.bus.DieuChuyenBUS;
 import com.qlts.bus.NhanVienBUS;

@@ -1,19 +1,5 @@
 package com.qlts.view;
 
-import panel.YeuCauPanel;
-import panel.ThietBiPanel;
-import panel.TaiSanPanel;
-import panel.TaiSanCuaToiPanel;
-import panel.PhongBanPanel;
-import panel.NhatKyPanel;
-import panel.NhanVienPanel;
-import panel.LoaiTaiSanPanel;
-import panel.KiemKePanel;
-import panel.KhauHaoPanel;
-import panel.DieuChuyenPanel;
-import panel.CapPhatPanel;
-import panel.BaoTriPanel;
-import panel.BaoCaoThongKePanel;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.qlts.bus.AuthBUS;
 import com.qlts.common.Session;
@@ -25,7 +11,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import panel.ThanhLyPanel;
 
 public class MainFrame extends JFrame {
 

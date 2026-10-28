@@ -1,6 +1,5 @@
-package panel;
+package com.qlts.view;
 
-import dialog.KhauHaoDialog;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.qlts.bus.KhauHaoBUS;
 import com.qlts.common.Session;
