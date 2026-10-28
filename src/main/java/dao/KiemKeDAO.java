@@ -59,4 +59,24 @@ public class KiemKeDAO {
             ps.executeUpdate();
         } catch (SQLException e) { throw JdbcUtil.translate(e); }
     }
+
+    // 🔥 THÊM HÀM XÓA NÀY
+    public void delete(int maKiemKe) {
+        try (Connection c = DBConnection.getConnection(); 
+             PreparedStatement ps = c.prepareStatement("DELETE FROM kiem_ke WHERE ma_kiem_ke = ?")) {
+            ps.setInt(1, maKiemKe);
+            ps.executeUpdate();
+        } catch (SQLException e) { throw JdbcUtil.translate(e); }
+    }
+
+    public void capNhatSoLuongTaiSan(int id, boolean isTaiSan, int soLuongMoi) {
+        String table = isTaiSan ? "tai_san" : "thiet_bi";
+        String idCol = isTaiSan ? "ma_tai_san" : "ma_thiet_bi";
+        String sql = "UPDATE " + table + " SET so_luong = ? WHERE " + idCol + " = ?";
+        try (Connection c = DBConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, soLuongMoi);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) { throw JdbcUtil.translate(e); }
+    }
 }

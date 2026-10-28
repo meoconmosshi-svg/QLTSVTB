@@ -1,5 +1,6 @@
-package com.qlts.view;
+package panel;
 
+import dialog.NguoiDungDialog;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.qlts.bus.NguoiDungBUS;
 import com.qlts.common.Session;

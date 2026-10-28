@@ -1,18 +1,17 @@
-package com.qlts.view;
+package dialog;
 
-import com.qlts.bus.ThietBiBUS;
+import com.qlts.bus.TaiSanBUS;
 import com.qlts.common.Constants;
 import com.qlts.component.Combos;
 import com.qlts.component.FormDialog;
 import com.qlts.entity.LoaiTaiSan;
 import com.qlts.entity.NhaCungCap;
-import com.qlts.entity.ThietBi;
+import com.qlts.entity.TaiSan;
 import com.qlts.util.ImageUtil;
 import com.qlts.util.Parse;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -32,7 +31,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ThietBiDialog extends FormDialog {
+public class TaiSanDialog extends FormDialog {
 
     // ===== Các field cho ảnh =====
     private final JLabel lblPreview = new JLabel();
@@ -42,18 +41,15 @@ public class ThietBiDialog extends FormDialog {
     private String currentImageName = null;
 
     // ===== Field nghiệp vụ =====
-    private final ThietBiBUS bus;
-    private final ThietBi existing;
+    private final TaiSanBUS bus;
+    private final TaiSan existing;
 
     private final JTextField txtCode = new JTextField(20);
     private final JTextField txtTen = new JTextField(20);
     private final JSpinner spnSoLuong = new JSpinner(new SpinnerNumberModel(1, 1, 100000, 1));
     private final JComboBox<LoaiTaiSan> cboLoai;
     private final JComboBox<NhaCungCap> cboNcc;
-    private final JTextField txtHang = new JTextField(20);
-    private final JTextField txtModel = new JTextField(20);
     private final JTextField txtSerial = new JTextField(20);
-    private final JTextField txtCauHinh = new JTextField(20);
     private final JTextField txtNgayMua = new JTextField(20);
     private final JTextField txtHetBh = new JTextField(20);
     private final JTextField txtGiaMua = new JTextField(20);
@@ -63,23 +59,20 @@ public class ThietBiDialog extends FormDialog {
     private final JTextField txtViTri = new JTextField(20);
     private final JTextField txtGhiChu = new JTextField(20);
 
-    public ThietBiDialog(Window owner, ThietBiBUS bus, ThietBi existing,
-                         List<LoaiTaiSan> loai, List<NhaCungCap> ncc) {
-        super(owner, existing == null ? "Thêm thiết bị" : "Sửa thiết bị");
+    public TaiSanDialog(Window owner, TaiSanBUS bus, TaiSan existing,
+                        List<LoaiTaiSan> loai, List<NhaCungCap> ncc) {
+        super(owner, existing == null ? "Thêm tài sản" : "Sửa tài sản");
         this.bus = bus;
         this.existing = existing;
         cboLoai = Combos.withEmpty(loai);
         cboNcc = Combos.withEmpty(ncc);
 
-        addRow("Mã thiết bị (*)", txtCode);
-        addRow("Tên thiết bị (*)", txtTen);
+        addRow("Mã tài sản (*)", txtCode);
+        addRow("Tên tài sản (*)", txtTen);
         addRow("Số lượng (*)", spnSoLuong);
         addRow("Loại", cboLoai);
         addRow("Nhà cung cấp", cboNcc);
-        addRow("Hãng sản xuất", txtHang);
-        addRow("Model", txtModel);
         addRow("Số serial", txtSerial);
-        addRow("Cấu hình", txtCauHinh);
         addRow("Ngày mua (yyyy-MM-dd)", txtNgayMua);
         addRow("Hết bảo hành (yyyy-MM-dd)", txtHetBh);
         addRow("Giá mua", txtGiaMua);
@@ -88,7 +81,7 @@ public class ThietBiDialog extends FormDialog {
         addRow("Trạng thái", cboTrangThai);
         addRow("Vị trí", txtViTri);
         addRow("Ghi chú", txtGhiChu);
-        addRow("Ảnh thiết bị", buildImagePanel());    // ← THÊM
+        addRow("Ảnh tài sản", buildImagePanel());   // ← THÊM
 
         if (existing != null) fill(existing);
         else cboTinhTrang.setSelectedItem("Mới");
@@ -118,8 +111,8 @@ public class ThietBiDialog extends FormDialog {
         btnXoaAnh.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         btnChonAnh.setFocusPainted(false);
         btnXoaAnh.setFocusPainted(false);
-        btnChonAnh.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnXoaAnh.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnChonAnh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXoaAnh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChonAnh.addActionListener(e -> chonAnh());
         btnXoaAnh.addActionListener(e -> xoaAnh());
         btns.add(btnChonAnh);
@@ -132,7 +125,7 @@ public class ThietBiDialog extends FormDialog {
 
     private void chonAnh() {
         JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Chọn ảnh thiết bị");
+        fc.setDialogTitle("Chọn ảnh tài sản");
         fc.setFileFilter(new FileNameExtensionFilter(
                 "Ảnh (*.jpg, *.jpeg, *.png, *.gif)", "jpg", "jpeg", "png", "gif"));
         if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -154,16 +147,13 @@ public class ThietBiDialog extends FormDialog {
     // ============================================================
     // FILL DATA
     // ============================================================
-    private void fill(ThietBi t) {
+    private void fill(TaiSan t) {
         txtCode.setText(t.maCode());
         txtTen.setText(t.ten());
         spnSoLuong.setValue(t.soLuongSafe());
         if (t.maLoai() != null) Combos.select(cboLoai, x -> x.maLoai() == t.maLoai());
         if (t.maNcc() != null) Combos.select(cboNcc, x -> x.maNcc() == t.maNcc());
-        txtHang.setText(Parse.nz(t.hangSanXuat()));
-        txtModel.setText(Parse.nz(t.model()));
         txtSerial.setText(Parse.nz(t.soSerial()));
-        txtCauHinh.setText(Parse.nz(t.cauHinh()));
         txtNgayMua.setText(Parse.fmt(t.ngayMua()));
         txtHetBh.setText(Parse.fmt(t.ngayHetBh()));
         txtGiaMua.setText(t.giaMua() == null ? "" : t.giaMua().toPlainString());
@@ -195,25 +185,25 @@ public class ThietBiDialog extends FormDialog {
         LoaiTaiSan loai = (LoaiTaiSan) cboLoai.getSelectedItem();
         NhaCungCap ncc = (NhaCungCap) cboNcc.getSelectedItem();
 
-        String maCode = Parse.require(txtCode.getText(), "Mã thiết bị");
+        String maCode = Parse.require(txtCode.getText(), "Mã tài sản");
 
         // Xử lý ảnh
         String imageName = currentImageName;
         if (selectedImageFile != null) {
+            // Người dùng chọn ảnh mới → copy vào thư mục dự án
             imageName = ImageUtil.saveImage(selectedImageFile, maCode);
         } else if (currentImageName == null) {
-            imageName = null;
+            imageName = null;   // Đã xóa ảnh
         }
 
-        ThietBi t = new ThietBi(
-                existing == null ? null : existing.maThietBi(),
+        TaiSan t = new TaiSan(
+                existing == null ? null : existing.maTaiSan(),
                 maCode,
-                Parse.require(txtTen.getText(), "Tên thiết bị"),
+                Parse.require(txtTen.getText(), "Tên tài sản"),
                 (Integer) spnSoLuong.getValue(),
                 loai == null ? null : loai.maLoai(), loai == null ? null : loai.tenLoai(),
                 ncc == null ? null : ncc.maNcc(),
-                Parse.text(txtHang.getText()), Parse.text(txtModel.getText()),
-                Parse.text(txtSerial.getText()), Parse.text(txtCauHinh.getText()),
+                Parse.text(txtSerial.getText()),
                 Parse.date(txtNgayMua.getText(), "Ngày mua"),
                 Parse.date(txtHetBh.getText(), "Ngày hết bảo hành"),
                 Parse.money(txtGiaMua.getText(), "Giá mua"),

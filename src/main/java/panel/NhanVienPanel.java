@@ -1,5 +1,6 @@
-package com.qlts.view;
+package panel;
 
+import dialog.NhanVienDialog;
 import com.qlts.bus.DanhMucBUS;
 import com.qlts.bus.NhanVienBUS;
 import com.qlts.component.CrudPanel;

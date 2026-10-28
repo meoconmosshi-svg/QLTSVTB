@@ -1,5 +1,7 @@
-package com.qlts.view;
+package panel;
 
+import dialog.YeuCauDialog;
+import dialog.CapPhatDialog;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.qlts.bus.YeuCauCapPhatBUS;
 import com.qlts.common.Session;

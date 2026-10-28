@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BaoTriBUS {
+
     private final BaoTriDAO dao = new BaoTriDAO();
     private final NhatKyDAO nhatKy = new NhatKyDAO();
 
@@ -23,33 +24,51 @@ public class BaoTriBUS {
     }
 
     public void taoPhieu(Integer maTaiSan, Integer maThietBi, String loai, LocalDate ngay, String noiDung, String donVi, BigDecimal chiPhi) {
-        if (Session.current() == null) throw new BusinessException("Chưa đăng nhập.");
-        if ((maTaiSan == null) == (maThietBi == null)) throw new BusinessException("Chọn 1 tài sản hoặc thiết bị.");
-        if (noiDung == null || noiDung.isBlank()) throw new BusinessException("Nhập nội dung bảo trì.");
-        
+        if (Session.current() == null) {
+            throw new BusinessException("Chưa đăng nhập.");
+        }
+        if ((maTaiSan == null) == (maThietBi == null)) {
+            throw new BusinessException("Chọn 1 tài sản hoặc thiết bị.");
+        }
+        if (noiDung == null || noiDung.isBlank()) {
+            throw new BusinessException("Nhập nội dung bảo trì.");
+        }
+
         String trangThai = Session.isAdmin() ? "Đang thực hiện" : "Chờ duyệt";
         String code = "BT" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmssSSS"));
-        
-        BaoTri bt = new BaoTri(null, code, maTaiSan, maThietBi, loai, ngay, null, noiDung, 
+
+        BaoTri bt = new BaoTri(null, code, maTaiSan, maThietBi, loai, ngay, null, noiDung,
                 chiPhi == null ? BigDecimal.ZERO : chiPhi, donVi, Session.userId(), null, trangThai, null, null);
-        
+
         dao.insert(bt);
         nhatKy.ghi("TẠO BẢO TRÌ", "BAO_TRI", code, "Tạo phiếu bảo trì");
     }
 
     public void duyet(BaoTri bt) {
         Session.requireModify();
-        if (!"Chờ duyệt".equals(bt.trangThai())) throw new BusinessException("Chỉ duyệt phiếu đang chờ.");
+        if (!"Chờ duyệt".equals(bt.trangThai())) {
+            throw new BusinessException("Chỉ duyệt phiếu đang chờ.");
+        }
+
+        // 1. Đổi trạng thái phiếu
         dao.updateTrangThai(bt.maBaoTri(), "Đang thực hiện");
-        nhatKy.ghi("DUYỆT BT", "BAO_TRI", bt.maBtCode(), "Đã duyệt");
+        // 2. Đổi trạng thái Tài sản -> Đang bảo trì (Không cho cấp phát nữa)
+        dao.updateTrangThaiTaiSan(bt.maTaiSan() != null ? bt.maTaiSan() : bt.maThietBi(), bt.maTaiSan() != null, "Bảo trì");
+
+        nhatKy.ghi("DUYỆT BT", "BAO_TRI", bt.maBtCode(), "Đã duyệt, chuyển TS sang Bảo trì");
     }
 
     public void hoanThanh(BaoTri bt, LocalDate ngay, String ketQua, BigDecimal chiPhi) {
         Session.requireModify();
-        if (ngay == null) throw new BusinessException("Chọn ngày kết thúc.");
-        if (chiPhi == null || chiPhi.signum() < 0) throw new BusinessException("Chi phí không hợp lệ.");
-        
+        Session.requireModify();
+        if (ngay == null) {
+            throw new BusinessException("Chọn ngày kết thúc.");
+        }
+
         dao.hoanThanh(bt.maBaoTri(), ngay, ketQua, chiPhi);
+        // 🔥 Đổi trạng thái tài sản về lại Trong kho để có thể cấp phát tiếp
+        dao.updateTrangThaiTaiSan(bt.maTaiSan() != null ? bt.maTaiSan() : bt.maThietBi(), bt.maTaiSan() != null, "Trong kho");
+
         nhatKy.ghi("HOÀN THÀNH BT", "BAO_TRI", bt.maBtCode(), "Chi phí: " + chiPhi);
     }
 

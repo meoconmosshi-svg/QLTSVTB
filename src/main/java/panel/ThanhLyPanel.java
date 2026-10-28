@@ -1,5 +1,7 @@
-package com.qlts.view;
+package panel;
 
+import view.*;
+import dialog.ThanhLyDialog;
 import com.qlts.bus.ThanhLyBUS;
 import com.qlts.bus.TaiSanBUS;
 import com.qlts.bus.ThietBiBUS;

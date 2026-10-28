@@ -1,5 +1,6 @@
-package com.qlts.view;
+package panel;
 
+import dialog.ThietBiDialog;
 import com.qlts.bus.DanhMucBUS;
 import com.qlts.bus.ThietBiBUS;
 import com.qlts.component.CrudPanel;

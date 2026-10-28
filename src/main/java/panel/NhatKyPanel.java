@@ -1,4 +1,4 @@
-package com.qlts.view;
+package panel;
 
 import com.qlts.bus.NhatKyBUS;
 import com.qlts.component.CrudPanel;

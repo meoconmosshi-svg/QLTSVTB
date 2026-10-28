@@ -1,4 +1,4 @@
-package com.qlts.view;
+package panel;
 
 import com.qlts.bus.CapPhatBUS;
 import com.qlts.common.Session;

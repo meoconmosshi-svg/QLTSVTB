@@ -1,4 +1,4 @@
-package com.qlts.view;
+package dialog;
 
 import com.qlts.bus.ThanhLyBUS;
 import com.qlts.common.BusinessException;

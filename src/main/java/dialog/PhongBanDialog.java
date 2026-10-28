@@ -1,4 +1,4 @@
-package com.qlts.view;
+package dialog;
 
 import com.qlts.bus.NguoiDungBUS;
 import com.qlts.bus.PhongBanBUS;
