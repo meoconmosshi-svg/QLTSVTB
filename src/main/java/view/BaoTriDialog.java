@@ -50,6 +50,8 @@ public class BaoTriDialog extends FormDialog {
         cboObj.removeAllItems();
         DefaultComboBoxModel<Item> m = new DefaultComboBoxModel<>();
         
+         m.addElement(new Item(-1, "--- Chọn đối tượng ---"));
+        
         if (cboLoaiObj.getSelectedIndex() == 0) {
             if (taiSans.isEmpty()) m.addElement(new Item(-1, "--- Không có Tài sản nào ---"));
             else taiSans.forEach(t -> m.addElement(new Item(t.maTaiSan(), t.maCode() + " - " + t.ten())));

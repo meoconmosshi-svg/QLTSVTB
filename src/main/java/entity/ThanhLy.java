@@ -14,8 +14,8 @@ public record ThanhLy(
         Integer nguoiDuyet,
         String trangThai, 
         String ghiChu,
-        Integer nguoiTao,     // 🔥 Thêm
+        Integer nguoiTao,
         String tenDoiTuong, 
         String tenNguoiDuyet, 
-        String tenNguoiTao) { // 🔥 Thêm
+        String tenNguoiTao) {
 }
