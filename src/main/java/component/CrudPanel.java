@@ -168,8 +168,8 @@ public abstract class CrudPanel<T> extends JPanel {
         header.setDefaultRenderer(headerRenderer);
 
         // ========== TOOLBAR TRÊN ==========
-        JButton btnSearch  = new JButton("🔍 Tìm");
-        JButton btnRefresh = new JButton("↻ Làm mới");
+        JButton btnSearch  = new JButton("Tìm");
+        JButton btnRefresh = new JButton("Làm mới");
         btnSearch.setFont(FONT_BASE);
         btnRefresh.setFont(FONT_BASE);
         btnSearch.addActionListener(e -> refresh());
@@ -189,7 +189,7 @@ public abstract class CrudPanel<T> extends JPanel {
         left.add(btnRefresh);
 
         // ===== NÚT XEM CHI TIẾT (hiện với mọi role) =====
-        JButton btnDetail = new JButton("👁 Chi tiết");
+        JButton btnDetail = new JButton("Chi tiết");
         btnDetail.setFont(FONT_BOLD);
         btnDetail.setForeground(Color.WHITE);
         btnDetail.setBackground(new Color(0x6A1B9A));
@@ -201,9 +201,9 @@ public abstract class CrudPanel<T> extends JPanel {
 
         // ===== NÚT CRUD (chỉ hiện nếu có quyền) =====
         if (crud && Session.canModify()) {
-            JButton btnAdd    = new JButton("➕ Thêm");
-            JButton btnEdit   = new JButton("✎ Sửa");
-            JButton btnDelete = new JButton("🗑 Xóa");
+            JButton btnAdd    = new JButton("Thêm");
+            JButton btnEdit   = new JButton("Sửa");
+            JButton btnDelete = new JButton("Xóa");
 
             styleCrudButton(btnAdd,    new Color(0x2E7D32));
             styleCrudButton(btnEdit,   new Color(0x1565C0));
